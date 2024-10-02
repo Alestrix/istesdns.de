@@ -21,9 +21,10 @@ spec:
         - -c
         - |
           cd /public
-          wget https://github.com/Alestrix/istesdns.de/archive/refs/heads/master.zip
-          unzip master.zip
-          mv istesdns.de-master/* .
+          wget https://github.com/Alestrix/istesdns.de/archive/refs/heads/main.zip
+          unzip main.zip
+          mv istesdns.de-main/* .
+          rm -rf istesdns.de-main/ main.zip k8s/
           ls -al
         volumeMounts:
         - name: site
