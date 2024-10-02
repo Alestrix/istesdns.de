@@ -1,0 +1,57 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: istesdns-dep
+spec:
+  selector:
+    matchLabels:
+      app: istesdns
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: istesdns
+    spec:
+      initContainers:
+      - name: pull-source
+        image: alpine:latest
+        command:
+        - sh
+        - -c
+        - |
+          cd /public
+          wget https://github.com/Alestrix/istesdns.de/archive/refs/heads/master.zip
+          unzip master.zip
+          mv istesdns.de-master/* .
+          ls -al
+        volumeMounts:
+        - name: site
+          mountPath: /public
+      containers:
+      - name: istesdns-web
+        image: joseluisq/static-web-server:2
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: 500m
+            memory: 256M
+        volumeMounts:
+        - name: site
+          mountPath: /public
+      volumes:
+      - name: site
+        emptyDir:
+          medium: Memory
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: istesdns-svc
+spec:
+  selector:
+    app: istesdns
+  ports:
+    - protocol: TCP
+      port: 80
