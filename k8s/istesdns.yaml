@@ -23,8 +23,8 @@ spec:
           cd /public
           wget https://github.com/Alestrix/istesdns.de/archive/refs/heads/main.zip
           unzip main.zip
-          mv istesdns.de-main/* .
-          rm -rf istesdns.de-main/ main.zip k8s/
+          mv -d . istesdns.de-main/index.html istesdns.de-main/style.css
+          rm -rf istesdns.de-main/ main.zip
           ls -al
         volumeMounts:
         - name: site
