@@ -50,6 +50,9 @@ spec:
             path: /health
             port: 80
             scheme: HTTP
+            failureThreshold: 1
+            initialDelaySeconds: 10
+            periodSeconds: 10
         resources:
           limits:
             cpu: 500m
