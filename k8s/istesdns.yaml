@@ -57,8 +57,11 @@ spec:
         resources:
           limits:
             cpu: 500m
-            memory: 256M
-        volumeMounts:
+            memory: 256Mi
+          requests:
+            cpu: 50m
+            memory: 64Mi
+          volumeMounts:
         - name: site
           mountPath: /public
       volumes:
