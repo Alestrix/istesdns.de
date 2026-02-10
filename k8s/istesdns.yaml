@@ -24,9 +24,8 @@ spec:
           cd /public
           wget https://github.com/Alestrix/istesdns.de/archive/refs/heads/main.zip
           unzip main.zip
-          mv -d . istesdns.de-main/index.html istesdns.de-main/style.css
-          rm -rf istesdns.de-main/ main.zip
-          ls -al
+          mv -Rd . istesdns.de-main/*
+          rm -rf istesdns.de-main/ k8s/ main.zip
         volumeMounts:
         - name: site
           mountPath: /public
@@ -61,7 +60,7 @@ spec:
           requests:
             cpu: 50m
             memory: 64Mi
-          volumeMounts:
+        volumeMounts:
         - name: site
           mountPath: /public
       volumes:
