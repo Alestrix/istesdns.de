@@ -24,7 +24,7 @@ spec:
           cd /public
           wget https://github.com/Alestrix/istesdns.de/archive/refs/heads/main.zip
           unzip main.zip
-          mv -d . istesdns.de-main/*
+          mv -t . istesdns.de-main/*
           rm -rf istesdns.de-main/ k8s/ main.zip
         volumeMounts:
         - name: site
@@ -50,9 +50,9 @@ spec:
             path: /health
             port: 80
             scheme: HTTP
-            failureThreshold: 1
-            initialDelaySeconds: 10
-            periodSeconds: 10
+          failureThreshold: 1
+          initialDelaySeconds: 10
+          periodSeconds: 10
         resources:
           limits:
             cpu: 500m
